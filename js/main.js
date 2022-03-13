@@ -17,35 +17,19 @@ function getRandomInteger(min, max) {
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
 
-const checkId = (array) => {
-  let number = getRandomInteger (1, 100);
-  for(let i = 0; i <= array.length - 1; i++) {
+const generateComments = (count) => {
+  const commentsArray = [];
 
-    for (let j = 0; j <= array[i].comments.length - 1; j++) {
-      const innerArray = array[i].comments;
-
-      // В этом цикле перебираем здесь каждый объект в массиве comments
-      // Айдишники собираем в новый массив ids, есди такого еще нет
-      // В самый первый элемент массива записываем первое значение number
-      // Если это не первый цикл первого цикла и значение в новом массиве не равно number, то добавляем в этот массив новый элемент и number оставляем неизменяемым
-      // А если не подходит условию, то вызываем снова функцию getRandomInteger(1,100) для number
-
-      const ids = [];
-
-      if (i === 0 && j === 0) {
-        ids[0] = number;
-      }
-
-      const isExistingId = ids.some((value) => value === number);
-
-      if(!(i === 0 && j === 0) && !isExistingId) {
-        number = getRandomInteger (1, 100);
-      } else {
-        ids.push(innerArray[j].id);
-      }
-    }
+  for (let i = 1; i <= count; i++) {
+    const comment = {
+      id: i,
+      avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
+      message: getRandomArrayElement(NOTES),
+      name: getRandomArrayElement(NAMES),
+    };
+    commentsArray.push(comment);
   }
-  return number;
+  return commentsArray;
 };
 
 const posts = [];
@@ -56,16 +40,7 @@ for (let i = 1; i <= POSTS_COUNT; i++) {
     url: `photos/${i}.jpg`,
     description: 'Как же прекрасно это время года!',
     likes: getRandomInteger(15, 200),
-    comments: [
-      {
-        id: checkId(posts),
-        avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
-        message: getRandomArrayElement(NOTES),
-        name: getRandomArrayElement(NAMES),
-      },
-    ],
+    comments: generateComments(getRandomInteger(1, 5)),
   };
   posts.push(post);
 }
-
-console.log(posts);
