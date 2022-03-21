@@ -1,1 +1,2 @@
-import './picture.js';
+import './pictures.js';
+import './full-size.js';
