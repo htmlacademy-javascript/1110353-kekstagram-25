@@ -10,7 +10,7 @@ const NOTES = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 const NAMES = ['Анастасия', 'Кирилл', 'Надежда', 'Ирина', 'Сергей'];
-const POSTS_COUNT = 25;
+const PICTURES_COUNT = 25;
 
 const generateComments = (count) => {
   const commentsArray = [];
@@ -27,20 +27,20 @@ const generateComments = (count) => {
   return commentsArray;
 };
 
-const createPosts = () => {
-  const posts = [];
+const createPictures = () => {
+  const picturesArray = [];
 
-  for (let i = 1; i <= POSTS_COUNT; i++) {
-    const post = {
+  for (let i = 1; i <= PICTURES_COUNT; i++) {
+    const img = {
       id: i,
       url: `photos/${i}.jpg`,
       description: 'Как же прекрасно это время года!',
       likes: getRandomInteger(15, 200),
       comments: generateComments(getRandomInteger(1, 5)),
     };
-    posts.push(post);
+    picturesArray.push(img);
   }
-  return posts;
+  return picturesArray;
 };
 
-export {createPosts};
+export {createPictures};
