@@ -2,13 +2,15 @@ import {createPictures} from './data.js';
 import {getRandomArrayElement} from './util.js';
 
 const bigPictureBlock = document.querySelector('.big-picture');
-const commentsCountBlock = bigPictureBlock.querySelector('.social__comment-count');
-const showMore = bigPictureBlock.querySelector('.comments-loader');
 const bigPictureImg = bigPictureBlock.querySelector('.big-picture__img');
 const likesCount = bigPictureBlock.querySelector('.likes-count');
 const commentsCount = bigPictureBlock.querySelector('.comments-count');
 const socialComments = bigPictureBlock.querySelector('.social__comments');
 const photoDescription = bigPictureBlock.querySelector('.social__caption');
+
+const commentsCountBlock = bigPictureBlock.querySelector('.social__comment-count');
+const showMore = bigPictureBlock.querySelector('.comments-loader');
+
 const fullSizePicture = getRandomArrayElement(createPictures());
 
 bigPictureBlock.classList.remove('hidden');
@@ -51,3 +53,4 @@ const drawBigPictureBlock = (picture) => {
 
 drawBigPictureBlock(fullSizePicture);
 
+export {bigPictureBlock};
