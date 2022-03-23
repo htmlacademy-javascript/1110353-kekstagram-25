@@ -1,20 +1,19 @@
 import {createPictures} from './data.js';
 import {getRandomArrayElement} from './util.js';
 
-const bigPictureBlock = document.querySelector('.big-picture');
-const bigPictureImg = bigPictureBlock.querySelector('.big-picture__img');
-const likesCount = bigPictureBlock.querySelector('.likes-count');
-const commentsCount = bigPictureBlock.querySelector('.comments-count');
-const socialComments = bigPictureBlock.querySelector('.social__comments');
-const photoDescription = bigPictureBlock.querySelector('.social__caption');
+const bigPictureModal = document.querySelector('.big-picture');
+const bigPictureImg = bigPictureModal.querySelector('.big-picture__img');
+const likesCount = bigPictureModal.querySelector('.likes-count');
+const commentsCount = bigPictureModal.querySelector('.comments-count');
+const socialComments = bigPictureModal.querySelector('.social__comments');
+const photoDescription = bigPictureModal.querySelector('.social__caption');
 
-const commentsCountBlock = bigPictureBlock.querySelector('.social__comment-count');
-const showMore = bigPictureBlock.querySelector('.comments-loader');
+const commentsCountBlock = bigPictureModal.querySelector('.social__comment-count');
+const showMore = bigPictureModal.querySelector('.comments-loader');
 
+// Временно решила выбирать рандомный объект в массиве объектов для отображении его данных в блоке полного изображения
 const fullSizePicture = getRandomArrayElement(createPictures());
 
-bigPictureBlock.classList.remove('hidden');
-document.body.classList.add('modal-open');
 commentsCountBlock.classList.add('hidden');
 showMore.classList.add('hidden');
 
@@ -53,4 +52,4 @@ const drawBigPictureBlock = (picture) => {
 
 drawBigPictureBlock(fullSizePicture);
 
-export {bigPictureBlock};
+export {bigPictureModal};
