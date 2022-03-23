@@ -23,10 +23,6 @@ function closeModal () {
   document.removeEventListener('keydown', onModalEscKeydown);
 }
 
-smallPicture.addEventListener('click', () => {
-  openModal();
-});
+smallPicture.addEventListener('click', openModal);
 
-modalClose.addEventListener('click', () => {
-  closeModal();
-});
+modalClose.addEventListener('click', closeModal);
