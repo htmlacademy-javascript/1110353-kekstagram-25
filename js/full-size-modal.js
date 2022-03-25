@@ -20,6 +20,7 @@ function openModal () {
 
 function closeModal () {
   bigPictureModal.classList.add('hidden');
+  document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onModalEscKeydown);
 }
 
