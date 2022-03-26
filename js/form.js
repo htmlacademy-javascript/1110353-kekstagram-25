@@ -25,7 +25,7 @@ function closeImgOverlay () {
   resetData();
 }
 
-// Доработать фуккцию с остальными данными
+// Доработать функцию с остальными данными
 
 // Почему даже без этой функции после закрытия imgOverlay, imgUploadInput.value не сохраняет предыдущее загруженное?
 function resetData () {
@@ -33,7 +33,7 @@ function resetData () {
 }
 
 imgUploadInput.addEventListener('change', openImgOverlay);
-
 imgOverlayClose.addEventListener('click', closeImgOverlay);
 
+export {imgForm, onImgOverlayEscKeydown};
 
