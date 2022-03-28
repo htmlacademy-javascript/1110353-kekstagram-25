@@ -26,42 +26,33 @@ createTextContainers();
 
 const pristine = new Pristine(
   imgForm,
-  { classTo: 'text__container', errorTextParent: 'text__container' },
-  false
+  { classTo: 'text__container', errorTextParent: 'text__container' }
 );
 
 // Валидация хэштегов
 
-const checkHashtagsDuplicates = (hashtags) => {
-  const uniqueHashtags = new Set(hashtags);
-  return (hashtags.length === uniqueHashtags.size);
+const getUniqueHashtags = (fieldValue) => {
+  const splitedHashtags = fieldValue.toLowerCase().trim().split(EMPTY_SPACES_PATTERN);
+  const uniqueHashtags = new Set(splitedHashtags);
+  return [...uniqueHashtags].join(',');
 };
 
-const checkEachHashtagPattern = (hashtags) => {
-  for (let i = 0; i < hashtags.length; i++) {
-    if (!HASHTAG_PATTERN.test(hashtags[i])) {
-      return false;
-    }
-  }
-  return true;
-};
+const checkEachHashtagPattern = (hashtags) => hashtags.every((hashtag) => HASHTAG_PATTERN.test(hashtag));
 
 const validateHashtags = (fieldValue) => {
   if (!fieldValue) {
     return true;
   }
-
-  const splitedHashtags = fieldValue.toLowerCase().trim().replace(EMPTY_SPACES_PATTERN,' ').split(' ');
-  return (checkHashtagsDuplicates(splitedHashtags) && checkEachHashtagPattern(splitedHashtags) && splitedHashtags.length <= MAX_HASHTAGS);
+  // разве тут нужен метод toLowerCase()?
+  const splitedHashtags = fieldValue.toLowerCase().trim().split(EMPTY_SPACES_PATTERN);
+  return (checkEachHashtagPattern(splitedHashtags) && splitedHashtags.length <= MAX_HASHTAGS);
 };
 
 const getHashtagsErrorMessage = () => {
-  const splitedHashtags = hashtagsInput.value.toLowerCase().trim().replace(EMPTY_SPACES_PATTERN,' ').split(' ');
+  // разве тут нужен метод toLowerCase()?
+  const splitedHashtags = hashtagsInput.value.toLowerCase().trim().split(EMPTY_SPACES_PATTERN);
   if (splitedHashtags.length > MAX_HASHTAGS) {
     return 'Кол-во хэштегом не должно превышать 5';
-  }
-  if (!checkHashtagsDuplicates(splitedHashtags)) {
-    return 'Хэштеги повторяются';
   }
   if (!checkEachHashtagPattern(splitedHashtags)) {
     return 'Неправильно введен хэштег';
@@ -85,8 +76,10 @@ pristine.addValidator(
 // Валидация при отправки формы
 
 imgForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  pristine.validate();
+  if (!pristine.validate()) {
+    evt.preventDefault();
+  }
+  hashtagsInput.value = getUniqueHashtags(hashtagsInput.value);
 });
 
 // Отмена обработчика Esc при фокусе
