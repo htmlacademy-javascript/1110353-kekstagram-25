@@ -18,7 +18,9 @@ commentsCountBlock.classList.add('hidden');
 showMore.classList.add('hidden');
 
 
-const createSocialComments = (picture) => {
+const createCommentsFragment = (picture) => {
+  const pictureElementsFragment = document.createDocumentFragment();
+
   picture.comments.forEach((comment) => {
     const socialComment = document.createElement('li');
     const socialImg = document.createElement('img');
@@ -36,17 +38,17 @@ const createSocialComments = (picture) => {
 
     socialComment.append(socialImg);
     socialComment.append(socialText);
-    socialComments.append(socialComment);
+    pictureElementsFragment.append(socialComment);
   });
-  return socialComments;
+  return pictureElementsFragment;
 };
 
 const drawBigPictureBlock = (picture) => {
   bigPictureImg.querySelector('img').src = picture.url;
   likesCount.textContent = picture.likes;
   commentsCount.textContent = picture.comments.length;
-  socialComments.innerHtml = '';
-  socialComments.innerHtml = createSocialComments(picture);
+  socialComments.innerHTML = '';
+  socialComments.append(createCommentsFragment(picture));
   photoDescription.textContent = picture.description;
 };
 
