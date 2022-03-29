@@ -28,4 +28,5 @@ function closeImgOverlay () {
 imgUploadInput.addEventListener('change', openImgOverlay);
 imgOverlayClose.addEventListener('click', closeImgOverlay);
 
-export {imgForm, onImgOverlayEscKeydown};
+// Потом удалить из эспорта openImgOverlay
+export {imgForm, onImgOverlayEscKeydown, openImgOverlay};

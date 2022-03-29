@@ -33,7 +33,7 @@ const pristine = new Pristine(
 
 const getUniqueHashtags = (fieldValue) => {
   const splitedHashtags = fieldValue.toLowerCase().trim().split(EMPTY_SPACES_PATTERN);
-  const uniqueHashtags = new Set(splitedHashtags);
+  const uniqueHashtags = new Set(Array.from(splitedHashtags));
   return [...uniqueHashtags].join(',');
 };
 
@@ -78,8 +78,9 @@ pristine.addValidator(
 imgForm.addEventListener('submit', (evt) => {
   if (!pristine.validate()) {
     evt.preventDefault();
+  } else {
+    hashtagsInput.value = getUniqueHashtags(hashtagsInput.value);
   }
-  hashtagsInput.value = getUniqueHashtags(hashtagsInput.value);
 });
 
 // Отмена обработчика Esc при фокусе
