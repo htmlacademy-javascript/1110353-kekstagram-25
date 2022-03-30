@@ -4,8 +4,9 @@ const SCALE_STEP = 25;
 const buttonSmaller = imgForm.querySelector('.scale__control--smaller');
 const buttonBigger = imgForm.querySelector('.scale__control--bigger');
 const scaleValueiInput = imgForm.querySelector('.scale__control--value');
-const imgPreview = imgForm.querySelector('.img-upload__preview');
+const imgPreviewContainer = imgForm.querySelector('.img-upload__preview');
 
+// Потом удалить
 openImgOverlay();
 
 scaleValueiInput.value = '100%';
@@ -19,7 +20,7 @@ const makeSmaller= () => {
   else {
     buttonSmaller.removeAttribute('disabled');
     scaleNumber -= SCALE_STEP;
-    imgPreview.style.transform = `scale(${scaleNumber/100})`;
+    imgPreviewContainer.style.transform = `scale(${scaleNumber/100})`;
     scaleValueiInput.value = `${scaleNumber}%`;
   }
 };
@@ -31,10 +32,12 @@ const makeBigger = () => {
   else {
     buttonBigger.removeAttribute('disabled');
     scaleNumber += SCALE_STEP;
-    imgPreview.style.transform = `scale(${scaleNumber/100})`;
+    imgPreviewContainer.style.transform = `scale(${scaleNumber/100})`;
     scaleValueiInput.value = `${scaleNumber}%`;
   }
 };
 
 buttonSmaller.addEventListener('click', makeSmaller);
 buttonBigger.addEventListener('click', makeBigger);
+
+export {imgPreviewContainer};
