@@ -11,9 +11,8 @@ openImgOverlay();
 
 scaleValueiInput.value = '100%';
 let scaleNumber = Number(scaleValueiInput.value.slice(0, -1));
-scaleValueiInput.value = `${scaleNumber}%`;
 
-const makeSmaller= () => {
+const makeSmaller = () => {
   if (scaleNumber - SCALE_STEP < 25) {
     buttonSmaller.setAttribute('disabled');
   }
