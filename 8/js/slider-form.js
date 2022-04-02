@@ -50,6 +50,8 @@ const effectsRadios = imgForm.querySelectorAll('.effects__radio');
 const sliderElement = imgForm.querySelector('.effect-level__slider');
 const effectValueHidden = imgForm.querySelector('.effect-level__value');
 
+sliderElement.classList.add('hidden');
+
 noUiSlider.create(sliderElement, {
   range: {
     min: 0,
@@ -60,82 +62,68 @@ noUiSlider.create(sliderElement, {
   connect: 'lower',
 });
 
-const controlEffect = (effect, measure = '') => {
-  sliderElement.noUiSlider.on('update', () => {
-    effectValueHidden.value = sliderElement.noUiSlider.get();
-    imgPreview.style.filter = `${effect}(${effectValueHidden.value}${measure})`;
-  });
+// Переменная для хранения состояния выбранного эффекта и его измерения
+let selectedFilter = {
+  name: 'initial',
+  ending: ''
+};
+
+const updateEffect = (effect, measure = '') => {
+  effectValueHidden.value = sliderElement.noUiSlider.get();
+  imgPreview.style.filter = `${effect}(${effectValueHidden.value}${measure})`;
+  selectedFilter = { name: effect, ending: measure };
+};
+
+const getEffect = (effect) => {
+  switch (effect) {
+    case 'chrome':
+      updateEffect('grayscale');
+      return effect;
+    case 'sepia':
+      updateEffect('sepia');
+      return effect;
+    case 'marvin':
+      updateEffect('invert', '%');
+      return effect;
+    case 'phobos':
+      updateEffect('blur', 'px');
+      return effect;
+    case 'heat':
+      updateEffect('brightness');
+      return effect;
+    default:
+      // Почему не срабатывает?
+      // sliderElement.setAttribute('hidden');
+      sliderElement.classList.add('hidden');
+      effectValueHidden.value = '';
+      imgPreview.style.filter = 'initial';
+  }
 };
 
 const applyEffect = (evt) => {
   const targetButton = evt.target;
   sliderElement.classList.remove('hidden');
 
-  for (let i = 0; i < effectsRadios.length; i++) {
-    if(effectsRadios[i] !== targetButton) {
-      const classRemoved = `effects__preview--${effectsRadios[i].value}`;
-      imgPreview.classList.remove(classRemoved);
+  sliderElement.noUiSlider.on('update', () => {
+    effectValueHidden.value = sliderElement.noUiSlider.get();
+    imgPreview.style.filter = `${selectedFilter.name}(${effectValueHidden.value}${selectedFilter.ending})`;
+  });
+
+  for (const effectsRadio of effectsRadios) {
+    const classEffectsRadio = `effects__preview--${effectsRadio.value}`;
+
+    if(effectsRadio !== targetButton) {
+      imgPreview.classList.remove(classEffectsRadio);
     }
 
-    const classAdded = `effects__preview--${targetButton.value}`;
-    imgPreview.classList.add(classAdded);
-
-    // С оператором SWITCH
-
-    const getEffect = (effect) => {
-      switch (effect) {
-        case 'chrome':
-          controlEffect('grayscale');
-          break;
-        case 'sepia':
-          controlEffect('sepia');
-          break;
-        case 'marvin':
-          controlEffect('invert', '%');
-          break;
-        case 'phobos':
-          controlEffect('blur', 'px');
-          break;
-        case 'heat':
-          controlEffect('brightness');
-          break;
-        default:
-          sliderElement.classList.add('hidden');
-          effectValueHidden.value = '';
-          imgPreview.style.filter = 'initial';
-      }
-    };
+    imgPreview.classList.add(classEffectsRadio);
 
     sliderElement.noUiSlider.updateOptions(Effects[getEffect(targetButton.value).toUpperCase()]);
-
-
-    // Рабочий вариант
-
-    // if (targetButton.value === 'chrome') {
-    //   sliderElement.noUiSlider.updateOptions(Effects.CHROME);
-    //   controlEffect('grayscale');
-    // } else if (targetButton.value === 'sepia') {
-    //   sliderElement.noUiSlider.updateOptions(Effects.SEPIA);
-    //   controlEffect('sepia');
-    // } else if (targetButton.value === 'marvin') {
-    //   sliderElement.noUiSlider.updateOptions(Effects.MARVIN);
-    //   controlEffect('invert', '%');
-    // } else if (targetButton.value === 'phobos') {
-    //   sliderElement.noUiSlider.updateOptions(Effects.PHOBOS);
-    //   controlEffect('blur', 'px');
-    // } else if (targetButton.value === 'heat') {
-    //   sliderElement.noUiSlider.updateOptions(Effects.HEAT);
-    //   controlEffect('brightness');
-    // } else {
-    //   // Почему не срабатывает?
-    //   // sliderElement.setAttribute('hidden');
-    //   sliderElement.classList.add('hidden');
-    //   effectValueHidden.value = '';
-    //   imgPreview.style.filter = 'initial';
-    // }
   }
 };
 
 effectsList.addEventListener('change', applyEffect);
+
+// export {effectsList, applyEffect};
 
 // Убрать стили в html 60ст
