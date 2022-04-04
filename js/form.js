@@ -1,4 +1,5 @@
 import {isKeyEscape} from './util.js';
+// import {effectsList, applyEffect} from './slider-form.js';
 
 const imgForm = document.querySelector('.img-upload__form');
 const imgUploadInput = imgForm.querySelector('.img-upload__input');
@@ -23,9 +24,11 @@ function closeImgOverlay () {
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onImgOverlayEscKeydown);
   imgForm.reset();
+  // effectsList.removeEventListener('change', applyEffect);
 }
 
 imgUploadInput.addEventListener('change', openImgOverlay);
 imgOverlayClose.addEventListener('click', closeImgOverlay);
 
-export {imgForm, onImgOverlayEscKeydown};
+// Потом удалить из эспорта openImgOverlay
+export {imgForm, onImgOverlayEscKeydown, openImgOverlay};

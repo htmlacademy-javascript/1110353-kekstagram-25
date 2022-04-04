@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="nouislider/nouislider.css">
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -56,10 +57,15 @@
                   </div>
 
                   <!-- Изменение глубины эффекта, накладываемого на изображение -->
-                  <fieldset class="img-upload__effect-level  effect-level">
-                    <input class="effect-level__value" type="number" step="any" name="effect-level" value="">
+                  <fieldset class="img-upload__effect-level  effect-level" style="position:relative">
+                    <input class="effect-level__value" type="number" step="any" name="effect-level" value="" style="display:block; position:absolute; left:200px; z-index: 100; background: red"  >
                     <div class="effect-level__slider"></div>
                   </fieldset>
+
+                  <!-- <fieldset class="img-upload__effect-level  effect-level">
+                    <input class="effect-level__value" type="number" step="any" name="effect-level" value="">
+                    <div class="effect-level__slider"></div>
+                  </fieldset> -->
 
                   <!-- Кнопка для закрытия формы редактирования изображения -->
                   <button type="reset" class="img-upload__cancel  cancel" id="upload-cancel">Закрыть</button>
@@ -230,6 +236,7 @@
     <div class="img-upload__message  img-upload__message--loading">Загружаем...</div>
   </template>
 
+  <script src="nouislider/nouislider.js"></script>
   <script src="pristine/pristine.min.js"></script>
   <script src="js/main.js" type="module"></script>
 

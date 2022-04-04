@@ -1,5 +1,10 @@
 import {imgForm, onImgOverlayEscKeydown} from './form.js';
 
+// Примеры правильного хэштега по шаблону
+// #хэштег
+// #домМилыйДом
+// #weWillRockYou
+
 const HASHTAG_PATTERN = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
 const EMPTY_SPACES_PATTERN = /\s+/g;
 const MAX_HASHTAGS = 5;
@@ -26,14 +31,16 @@ createTextContainers();
 
 const pristine = new Pristine(
   imgForm,
-  { classTo: 'text__container', errorTextParent: 'text__container' }
+  { classTo: 'text__container', errorTextParent: 'text__container' },
+  false
 );
 
 // Валидация хэштегов
 
-const getUniqueHashtags = (fieldValue) => {
-  const splitedHashtags = fieldValue.toLowerCase().trim().split(EMPTY_SPACES_PATTERN);
-  const uniqueHashtags = new Set(splitedHashtags);
+const getSplitedHashtags = () => hashtagsInput.value.toLowerCase().trim().split(EMPTY_SPACES_PATTERN);
+
+const getUniqueHashtags = () => {
+  const uniqueHashtags = new Set(Array.from(getSplitedHashtags()));
   return [...uniqueHashtags].join(',');
 };
 
@@ -43,18 +50,14 @@ const validateHashtags = (fieldValue) => {
   if (!fieldValue) {
     return true;
   }
-  // разве тут нужен метод toLowerCase()?
-  const splitedHashtags = fieldValue.toLowerCase().trim().split(EMPTY_SPACES_PATTERN);
-  return (checkEachHashtagPattern(splitedHashtags) && splitedHashtags.length <= MAX_HASHTAGS);
+  return (checkEachHashtagPattern(getSplitedHashtags()) && (getSplitedHashtags()).length <= MAX_HASHTAGS);
 };
 
 const getHashtagsErrorMessage = () => {
-  // разве тут нужен метод toLowerCase()?
-  const splitedHashtags = hashtagsInput.value.toLowerCase().trim().split(EMPTY_SPACES_PATTERN);
-  if (splitedHashtags.length > MAX_HASHTAGS) {
+  if (getSplitedHashtags().length > MAX_HASHTAGS) {
     return 'Кол-во хэштегом не должно превышать 5';
   }
-  if (!checkEachHashtagPattern(splitedHashtags)) {
+  if (!checkEachHashtagPattern(getSplitedHashtags())) {
     return 'Неправильно введен хэштег';
   }
 };
@@ -78,8 +81,9 @@ pristine.addValidator(
 imgForm.addEventListener('submit', (evt) => {
   if (!pristine.validate()) {
     evt.preventDefault();
+  } else {
+    hashtagsInput.value = getUniqueHashtags(hashtagsInput.value);
   }
-  hashtagsInput.value = getUniqueHashtags(hashtagsInput.value);
 });
 
 // Отмена обработчика Esc при фокусе
