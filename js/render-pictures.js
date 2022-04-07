@@ -1,4 +1,5 @@
 import {renderBigPictureBlock, openBigPictureBlock} from './render-fullsize.js';
+// import {body} from './render-fullsize.js';
 
 const picturesContainer = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
