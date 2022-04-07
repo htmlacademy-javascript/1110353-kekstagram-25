@@ -1,13 +1,10 @@
-import {imgForm, openImgOverlay} from './form.js';
+import {imgForm} from './form.js';
 
 const SCALE_STEP = 25;
 const buttonSmaller = imgForm.querySelector('.scale__control--smaller');
 const buttonBigger = imgForm.querySelector('.scale__control--bigger');
 const scaleValueiInput = imgForm.querySelector('.scale__control--value');
 const imgPreviewContainer = imgForm.querySelector('.img-upload__preview');
-
-// Потом удалить
-openImgOverlay();
 
 scaleValueiInput.value = '100%';
 let scaleNumber = Number(scaleValueiInput.value.slice(0, -1));

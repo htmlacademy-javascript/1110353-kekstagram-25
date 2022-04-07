@@ -1,4 +1,4 @@
-import {isKeyEscape} from './util.js';
+import {isEscapeKey} from './util.js';
 // import {effectsList, applyEffect} from './slider-form.js';
 
 const imgForm = document.querySelector('.img-upload__form');
@@ -7,7 +7,7 @@ const imgOverlay = imgForm.querySelector('.img-upload__overlay');
 const imgOverlayClose = imgForm.querySelector('.img-upload__cancel');
 
 const onImgOverlayEscKeydown = (evt) => {
-  if(isKeyEscape(evt)) {
+  if(isEscapeKey(evt)) {
     evt.preventDefault();
     closeImgOverlay();
   }
