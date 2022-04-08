@@ -1,4 +1,3 @@
-
 import {imgForm, descriptionTextarea, hashtagsInput} from './form.js';
 
 // Примеры правильного хэштега по шаблону

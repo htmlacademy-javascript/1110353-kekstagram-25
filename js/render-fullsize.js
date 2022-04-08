@@ -81,4 +81,4 @@ const renderBigPictureBlock = (smallPicture) => {
   bigPictureClose.addEventListener('click', () => commentsShowMore.removeEventListener('click', loadComments));
 };
 
-export {renderBigPictureBlock, openBigPictureBlock, body};
+export {body, renderBigPictureBlock, openBigPictureBlock};

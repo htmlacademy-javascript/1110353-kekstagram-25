@@ -1,6 +1,6 @@
 import {isEscapeKey} from './util.js';
 import {body} from './render-fullsize.js';
-import {imgForm, descriptionTextarea, hashtagsInput} from './form.js';
+import {imgForm, imgUploadInput, descriptionTextarea, hashtagsInput} from './form.js';
 import {effectsList, applyEffect, resetSlider} from './slider-form.js';
 import {activateScaleButtons, deactivateScaleButtons, resetScale} from './scale-form.js';
 
@@ -29,11 +29,12 @@ function closeImgOverlay() {
   putFormElementsOffFocus();
   effectsList.removeEventListener('change', applyEffect);
   deactivateScaleButtons();
+  imgUploadInput.value = '';
+  resetSlider();
   // не срабатывает
   resetScale();
-  // // не очищается форма после закрытия окна
+  // // не очищается форма после закрытия окна, думала один imgForm.reset() все очистит
   // imgForm.reset();
-  resetSlider();
 }
 
 // Отмена обработчика Esc при фокусе

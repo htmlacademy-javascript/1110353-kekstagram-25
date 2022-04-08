@@ -1,8 +1,9 @@
-import {imgForm} from './form.js';
+import {imgForm, imgUploadInput} from './form.js';
+import {sendData} from './data-api.js';
 import {isPristineValid} from './form-validate.js';
 import {openImgOverlay, closeImgOverlay} from './form-upload-close.js';
+import {showSendDataSuccess, showSendDataError} from './messages.js';
 
-const imgUploadInput = imgForm.querySelector('.img-upload__input');
 const imgFormSubmit = imgForm.querySelector('.img-upload__submit');
 const imgFormClose = imgForm.querySelector('.img-upload__cancel');
 
@@ -11,39 +12,28 @@ const imgFormClose = imgForm.querySelector('.img-upload__cancel');
 const submitForm = () => {
 
   imgForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
 
-    if (!isPristineValid) {
-      evt.preventDefault();
+    if (isPristineValid) {
+      // не срабатывает разблокировка кнопки
+      imgFormSubmit.disabled = true;
+
+      const formData = new FormData(evt.target);
+      sendData(
+        ()=>{
+        // не срабатывает блокировка кнопки
+          imgFormSubmit.disabled = false;
+          closeImgOverlay();
+          showSendDataSuccess();
+        },
+        () => {
+        // не срабатывает блокировка кнопки
+          imgFormSubmit.disabled = false;
+          showSendDataError();
+        },
+        formData
+      );
     }
-    // не срабатывает
-    imgFormSubmit.setAttribute('disabled');
-    // imgFormSubmit.disabled = true;
-
-    const formData = new FormData(evt.target);
-    fetch(
-      'https://25.javascript.pages.academy/kekstagram',
-      {
-        method: 'POST',
-        body: formData,
-      },
-    )
-      .then((response) => {
-        if (response.ok) {
-          // onSuccessPopup();
-
-          // не срабатывает
-          imgFormSubmit.removeAttribute('disabled');
-          // imgFormSubmit.disabled = false;
-        }
-        throw new Error(`${response.status} ${response.statusText}`);
-      })
-      .catch(() => {
-        // onErrorPopup();
-        // не срабатывает
-        imgFormSubmit.removeAttribute('disabled');
-        // imgFormSubmit.disabled = false;
-      });
-
   });
 };
 

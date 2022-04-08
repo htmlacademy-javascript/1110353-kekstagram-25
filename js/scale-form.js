@@ -7,7 +7,6 @@ const scaleValueiInput = imgForm.querySelector('.scale__control--value');
 const imgPreviewContainer = imgForm.querySelector('.img-upload__preview');
 
 scaleValueiInput.value = '100%';
-// Почему после закрытия формы при открытии нового изображения - 55% значение
 let scaleNumber = Number(scaleValueiInput.value.slice(0, -1));
 
 const makeSmaller = () => {

@@ -1,6 +1,5 @@
 const FROM_SERVER = 'https://25.javascript.pages.academy/kekstagram/data';
-// const TO_SERVER = ;
-
+const TO_SERVER = 'https://25.javascript.pages.academy/kekstagram';
 
 const getData = (onSuccess, onFail) => {
   fetch(FROM_SERVER)
@@ -18,4 +17,24 @@ const getData = (onSuccess, onFail) => {
     });
 };
 
-export {getData};
+const sendData = (onSuccess, onFail, body) => {
+  fetch(
+    TO_SERVER,
+    {
+      method: 'POST',
+      body,
+    },
+  )
+    .then((response) => {
+      if (response.ok) {
+        onSuccess();
+      } else {
+        throw new Error;
+      }
+    })
+    .catch(() => {
+      onFail();
+    });
+};
+
+export {getData, sendData};
