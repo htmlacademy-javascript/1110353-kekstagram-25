@@ -122,8 +122,10 @@ const applyEffect = (evt) => {
   }
 };
 
-effectsList.addEventListener('change', applyEffect);
+const resetSlider = () => {
+  sliderElement.noUiSlider.reset();
+  imgPreview.style.filter = 'initial';
+};
 
-// export {effectsList, applyEffect};
-
+export {effectsList, applyEffect, resetSlider};
 // Убрать стили в html 60ст

@@ -1,4 +1,5 @@
 import {isEscapeKey} from './util.js';
+
 const main = document.querySelector('main');
 
 const closeBlock = (block) => {
@@ -29,6 +30,10 @@ const showErrorBlockGetData = () => {
   main.append(errorBlock);
   closeBlock(errorBlock);
 };
+
+// const showSuccessSendData = () => {
+
+// };
 
 // export { createCard, showSuccessBlock, showErrorBlock, showErrorBlockGetData };
 export {showErrorBlockGetData};

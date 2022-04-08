@@ -8,16 +8,13 @@ const getData = (onSuccess, onFail) => {
       if (response.ok) {
         return response.json();
       }
-      // throw new Error(`${response.status} ${response.statusText}`);
+      throw new Error(`${response.status} ${response.statusText}`);
     })
     .then((data) => {
       onSuccess(data);
     })
-    // .catch((err)=> {
-    //   onFail(err);
-    // });
-    .catch(()=> {
-      onFail();
+    .catch((err)=> {
+      onFail(err);
     });
 };
 
