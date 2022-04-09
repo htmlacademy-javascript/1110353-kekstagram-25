@@ -4,7 +4,6 @@ import {body} from './render-fullsize.js';
 const main = document.querySelector('main');
 
 // Ошибка на получение данных
-
 const closeBlock = (block) => {
   block.addEventListener('click', () => {
     block.remove();
@@ -34,7 +33,6 @@ const showErrorBlockGetData = (err) => {
 };
 
 // Сообщения на отправку данных
-
 function onSuccessErrorEscKeydown(evt) {
   if (isEscapeKey(evt)) {
     evt.preventDefault();

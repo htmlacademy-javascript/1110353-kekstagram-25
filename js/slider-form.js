@@ -125,6 +125,7 @@ const applyEffect = (evt) => {
 const resetSlider = () => {
   sliderElement.noUiSlider.reset();
   imgPreview.style.filter = 'initial';
+  document.querySelector('#effect-none').checked = true;
 };
 
 export {effectsList, applyEffect, resetSlider};

@@ -8,19 +8,18 @@ const imgFormSubmit = imgForm.querySelector('.img-upload__submit');
 const imgFormClose = imgForm.querySelector('.img-upload__cancel');
 
 // Валидация формы
-
 const submitForm = () => {
 
   imgForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
-    if (isPristineValid) {
+    if (isPristineValid()) {
       // не срабатывает разблокировка кнопки
       imgFormSubmit.disabled = true;
 
       const formData = new FormData(evt.target);
       sendData(
-        ()=>{
+        () => {
         // не срабатывает блокировка кнопки
           imgFormSubmit.disabled = false;
           closeImgOverlay();
@@ -29,6 +28,7 @@ const submitForm = () => {
         () => {
         // не срабатывает блокировка кнопки
           imgFormSubmit.disabled = false;
+          closeImgOverlay();
           showSendDataError();
         },
         formData
@@ -38,7 +38,6 @@ const submitForm = () => {
 };
 
 // Инициализация формы
-
 const initializeForm = () => {
   imgUploadInput.addEventListener('change', openImgOverlay);
   imgFormClose.addEventListener('click', closeImgOverlay);
