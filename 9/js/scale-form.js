@@ -44,8 +44,9 @@ const deactivateScaleButtons = () => {
 };
 
 const resetScale = () => {
-  // не срабатывает сброс на 100 проц
   scaleValueiInput.value = '100%';
+  imgPreviewContainer.style.transform = 'scale(1)';
+  scaleNumber = 100;
 };
 
 export {imgPreviewContainer, activateScaleButtons, deactivateScaleButtons, resetScale};

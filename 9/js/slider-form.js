@@ -92,8 +92,6 @@ const getEffect = (effect) => {
       updateEffect('brightness');
       return effect;
     default:
-      // Почему не срабатывает?
-      // sliderElement.setAttribute('hidden');
       sliderElement.classList.add('hidden');
       effectValueHidden.value = '';
       imgPreview.style.filter = 'initial';
@@ -125,6 +123,7 @@ const applyEffect = (evt) => {
 const resetSlider = () => {
   sliderElement.noUiSlider.reset();
   imgPreview.style.filter = 'initial';
+  document.querySelector('#effect-none').checked = true;
 };
 
 export {effectsList, applyEffect, resetSlider};
