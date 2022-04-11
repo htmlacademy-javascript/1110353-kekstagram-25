@@ -24,8 +24,8 @@ const createTextContainers = () => {
 };
 
 createTextContainers();
-// Валидация формы
 
+// Валидация формы
 const pristine = new Pristine(
   imgForm,
   { classTo: 'text__container', errorTextParent: 'text__container' }
@@ -37,7 +37,6 @@ const getSplitedHashtags = () => {
   }
   return hashtagsInput.value.toLowerCase().trim().split(EMPTY_SPACES_PATTERN);
 };
-
 
 const checkBeginning = () => getSplitedHashtags().every((item) => item[0] === '#');
 const checkHashtagMaxlength = () => getSplitedHashtags().every((item) => item.length <= MAX_HASHTAGS_LENGTH);

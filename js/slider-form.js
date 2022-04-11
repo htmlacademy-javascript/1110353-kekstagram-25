@@ -92,8 +92,6 @@ const getEffect = (effect) => {
       updateEffect('brightness');
       return effect;
     default:
-      // Почему не срабатывает?
-      // sliderElement.setAttribute('hidden');
       sliderElement.classList.add('hidden');
       effectValueHidden.value = '';
       imgPreview.style.filter = 'initial';

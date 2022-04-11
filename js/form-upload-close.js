@@ -34,8 +34,6 @@ function closeImgOverlay() {
   resetScale();
   resetSlider();
   resetFields();
-  // // не очищается форма после закрытия окна, думала один imgForm.reset() все очистит
-  // imgForm.reset();
 }
 
 // Отмена обработчика Esc при фокусе

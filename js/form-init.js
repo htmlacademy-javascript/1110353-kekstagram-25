@@ -14,19 +14,16 @@ const submitForm = () => {
     evt.preventDefault();
 
     if (isPristineValid()) {
-      // не срабатывает разблокировка кнопки
       imgFormSubmit.disabled = true;
 
       const formData = new FormData(evt.target);
       sendData(
         () => {
-        // не срабатывает блокировка кнопки
           imgFormSubmit.disabled = false;
           closeImgOverlay();
           showSendDataSuccess();
         },
         () => {
-        // не срабатывает блокировка кнопки
           imgFormSubmit.disabled = false;
           closeImgOverlay();
           showSendDataError();
