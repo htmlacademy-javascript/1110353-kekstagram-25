@@ -1,53 +1,45 @@
-import {imgForm} from './form.js';
+import {imgForm, imgPreview} from './form.js';
 
 const SCALE_STEP = 25;
-const buttonSmaller = imgForm.querySelector('.scale__control--smaller');
-const buttonBigger = imgForm.querySelector('.scale__control--bigger');
+const MAX_SCALE = 100;
+const buttonDecrease = imgForm.querySelector('.scale__control--smaller');
+const buttonIncrease = imgForm.querySelector('.scale__control--bigger');
 const scaleValueiInput = imgForm.querySelector('.scale__control--value');
-const imgPreviewContainer = imgForm.querySelector('.img-upload__preview');
-const imgPreview = imgPreviewContainer.querySelector('img');
 
 scaleValueiInput.value = '100%';
-let scaleNumber = Number(scaleValueiInput.value.slice(0, -1));
 
-const makeSmaller = () => {
-  if (scaleNumber - SCALE_STEP < SCALE_STEP) {
-    buttonSmaller.setAttribute('disabled');
-  }
-  else {
-    buttonSmaller.removeAttribute('disabled');
-    scaleNumber -= SCALE_STEP;
-    imgPreview.style.transform = `scale(${scaleNumber/100})`;
-    scaleValueiInput.value = `${scaleNumber}%`;
-  }
-};
+function onButtonDecreaseImageClick() {
+  scaleValueiInput.value = `${parseFloat(scaleValueiInput.value) - SCALE_STEP}%`;
+  imgPreview.style.transform = `scale(${scaleValueiInput.value})`;
+  buttonIncrease.addEventListener('click', onButtonIncreaseImageClick);
 
-const makeBigger = () => {
-  if (scaleNumber + SCALE_STEP > 100) {
-    buttonBigger.setAttribute('disabled');
+  if (scaleValueiInput.value === `${SCALE_STEP}%`) {
+    buttonDecrease.removeEventListener('click', onButtonDecreaseImageClick);
   }
-  else {
-    buttonBigger.removeAttribute('disabled');
-    scaleNumber += SCALE_STEP;
-    imgPreview.style.transform = `scale(${scaleNumber/100})`;
-    scaleValueiInput.value = `${scaleNumber}%`;
-  }
-};
+}
 
-const activateScaleButtons = () => {
-  buttonSmaller.addEventListener('click', makeSmaller);
-  buttonBigger.addEventListener('click', makeBigger);
+function onButtonIncreaseImageClick() {
+  scaleValueiInput.value = `${parseFloat(scaleValueiInput.value) + SCALE_STEP}%`;
+  imgPreview.style.transform = `scale(${scaleValueiInput.value})`;
+  buttonDecrease.addEventListener('click', onButtonDecreaseImageClick);
+
+  if (scaleValueiInput.value === `${MAX_SCALE}%`) {
+    buttonIncrease.removeEventListener('click', onButtonIncreaseImageClick);
+  }
+}
+
+const activateDecreaseButton = () => {
+  buttonDecrease.addEventListener('click', onButtonDecreaseImageClick);
 };
 
 const deactivateScaleButtons = () => {
-  buttonSmaller.addEventListener('click', makeSmaller);
-  buttonBigger.addEventListener('click', makeBigger);
+  buttonDecrease.removeEventListener('click', onButtonDecreaseImageClick);
+  buttonIncrease.removeEventListener('click', onButtonIncreaseImageClick);
 };
 
 const resetScale = () => {
   scaleValueiInput.value = '100%';
   imgPreview.style.transform = 'scale(1)';
-  scaleNumber = 100;
 };
 
-export {imgPreview, activateScaleButtons, deactivateScaleButtons, resetScale};
+export {activateDecreaseButton, deactivateScaleButtons, resetScale};

@@ -1,7 +1,8 @@
-import {imgForm, imgUploadInput} from './form.js';
+import {imgForm, imgChooser} from './form.js';
 import {sendData} from './data-api.js';
 import {isPristineValid} from './form-validate.js';
 import {openImgOverlay, closeImgOverlay} from './form-upload-close.js';
+import {imgLoad} from './img-load.js';
 import {showSendDataSuccess, showSendDataError} from './messages.js';
 
 const imgFormSubmit = imgForm.querySelector('.img-upload__submit');
@@ -36,9 +37,10 @@ const submitForm = () => {
 
 // Инициализация формы
 const initializeForm = () => {
-  imgUploadInput.addEventListener('change', openImgOverlay);
-  imgFormClose.addEventListener('click', closeImgOverlay);
+  imgLoad();
   submitForm();
+  imgChooser.addEventListener('change', openImgOverlay);
+  imgFormClose.addEventListener('click', closeImgOverlay);
 };
 
 export {initializeForm};

@@ -1,5 +1,4 @@
-import {imgForm} from './form.js';
-import {imgPreview} from './scale-form.js';
+import {imgForm, imgPreview} from './form.js';
 
 const Effects = {
   CHROME: {
