@@ -1,5 +1,4 @@
-import {imgForm} from './form.js';
-import {imgPreviewContainer} from './scale-form.js';
+import {imgForm, imgPreview} from './form.js';
 
 const Effects = {
   CHROME: {
@@ -45,7 +44,6 @@ const Effects = {
 };
 
 const effectsList = imgForm.querySelector('.effects__list');
-const imgPreview = imgPreviewContainer.querySelector('img');
 const effectsRadios = imgForm.querySelectorAll('.effects__radio');
 const sliderElement = imgForm.querySelector('.effect-level__slider');
 const effectValueHidden = imgForm.querySelector('.effect-level__value');
@@ -92,8 +90,6 @@ const getEffect = (effect) => {
       updateEffect('brightness');
       return effect;
     default:
-      // Почему не срабатывает?
-      // sliderElement.setAttribute('hidden');
       sliderElement.classList.add('hidden');
       effectValueHidden.value = '';
       imgPreview.style.filter = 'initial';
@@ -122,8 +118,11 @@ const applyEffect = (evt) => {
   }
 };
 
-effectsList.addEventListener('change', applyEffect);
+const resetSlider = () => {
+  sliderElement.noUiSlider.reset();
+  sliderElement.classList.add('hidden');
+  imgPreview.style.filter = 'initial';
+  document.querySelector('#effect-none').checked = true;
+};
 
-// export {effectsList, applyEffect};
-
-// Убрать стили в html 60ст
+export {effectsList, applyEffect, resetSlider};
