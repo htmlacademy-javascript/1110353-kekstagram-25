@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Anastasiia Rakhmatova](https://htmlacademy.ru/profile/id1110353).
-* Наставник: [Александр Карцев](https://htmlacademy.ru/profile/id663289).
+* Наставник: [Роман Марченко](https://htmlacademy.ru/profile/id505487).
 
 ---
 
