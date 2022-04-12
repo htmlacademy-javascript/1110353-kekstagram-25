@@ -5,6 +5,7 @@ const buttonSmaller = imgForm.querySelector('.scale__control--smaller');
 const buttonBigger = imgForm.querySelector('.scale__control--bigger');
 const scaleValueiInput = imgForm.querySelector('.scale__control--value');
 const imgPreviewContainer = imgForm.querySelector('.img-upload__preview');
+const imgPreview = imgPreviewContainer.querySelector('img');
 
 scaleValueiInput.value = '100%';
 let scaleNumber = Number(scaleValueiInput.value.slice(0, -1));
@@ -16,7 +17,7 @@ const makeSmaller = () => {
   else {
     buttonSmaller.removeAttribute('disabled');
     scaleNumber -= SCALE_STEP;
-    imgPreviewContainer.style.transform = `scale(${scaleNumber/100})`;
+    imgPreview.style.transform = `scale(${scaleNumber/100})`;
     scaleValueiInput.value = `${scaleNumber}%`;
   }
 };
@@ -28,7 +29,7 @@ const makeBigger = () => {
   else {
     buttonBigger.removeAttribute('disabled');
     scaleNumber += SCALE_STEP;
-    imgPreviewContainer.style.transform = `scale(${scaleNumber/100})`;
+    imgPreview.style.transform = `scale(${scaleNumber/100})`;
     scaleValueiInput.value = `${scaleNumber}%`;
   }
 };
@@ -45,8 +46,8 @@ const deactivateScaleButtons = () => {
 
 const resetScale = () => {
   scaleValueiInput.value = '100%';
-  imgPreviewContainer.style.transform = 'scale(1)';
+  imgPreview.style.transform = 'scale(1)';
   scaleNumber = 100;
 };
 
-export {imgPreviewContainer, activateScaleButtons, deactivateScaleButtons, resetScale};
+export {imgPreview, activateScaleButtons, deactivateScaleButtons, resetScale};

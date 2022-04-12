@@ -26,14 +26,14 @@ function openImgOverlay() {
 function closeImgOverlay() {
   imgOverlay.classList.add('hidden');
   body.classList.remove('modal-open');
-  document.removeEventListener('keydown', onImgOverlayEscKeydown);
-  putFormElementsOffFocus();
-  effectsList.removeEventListener('change', applyEffect);
-  deactivateScaleButtons();
   imgUploadInput.value = '';
+  document.removeEventListener('keydown', onImgOverlayEscKeydown);
   resetScale();
+  deactivateScaleButtons();
   resetSlider();
+  effectsList.removeEventListener('change', applyEffect);
   resetFields();
+  putFormElementsOffFocus();
 }
 
 // Отмена обработчика Esc при фокусе

@@ -1,5 +1,5 @@
 import {imgForm} from './form.js';
-import {imgPreviewContainer} from './scale-form.js';
+import {imgPreview} from './scale-form.js';
 
 const Effects = {
   CHROME: {
@@ -45,7 +45,6 @@ const Effects = {
 };
 
 const effectsList = imgForm.querySelector('.effects__list');
-const imgPreview = imgPreviewContainer.querySelector('img');
 const effectsRadios = imgForm.querySelectorAll('.effects__radio');
 const sliderElement = imgForm.querySelector('.effect-level__slider');
 const effectValueHidden = imgForm.querySelector('.effect-level__value');
@@ -122,9 +121,9 @@ const applyEffect = (evt) => {
 
 const resetSlider = () => {
   sliderElement.noUiSlider.reset();
+  sliderElement.classList.add('hidden');
   imgPreview.style.filter = 'initial';
   document.querySelector('#effect-none').checked = true;
 };
 
 export {effectsList, applyEffect, resetSlider};
-// Убрать стили в html 60ст
