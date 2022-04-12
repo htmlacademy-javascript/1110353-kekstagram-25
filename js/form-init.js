@@ -38,8 +38,8 @@ const submitForm = () => {
 // Инициализация формы
 const initializeForm = () => {
   imgLoad();
-  submitForm();
   imgChooser.addEventListener('change', openImgOverlay);
+  submitForm();
   imgFormClose.addEventListener('click', closeImgOverlay);
 };
 
