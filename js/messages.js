@@ -15,7 +15,7 @@ const showErrorBlockGetData = (err) => {
   alertContainer.style.fontSize = '30px';
   alertContainer.style.textAlign = 'center';
   alertContainer.style.backgroundColor = 'red';
-  alertContainer.textContent = `${err} - Упс, что-то пошло не так :( Попробуй проверить соединение`;
+  alertContainer.textContent = `${err} - Упс, попробуй проверить соединение :(`;
 
   body.append(alertContainer);
 
