@@ -6,10 +6,15 @@ const buttonDecrease = imgForm.querySelector('.scale__control--smaller');
 const buttonIncrease = imgForm.querySelector('.scale__control--bigger');
 const scaleValueInput = imgForm.querySelector('.scale__control--value');
 
-scaleValueInput.value = '100%';
+const setInputValue = (value) => {
+  scaleValueInput.value = value;
+  scaleValueInput.setAttribute('value', scaleValueInput.value);
+};
+
+setInputValue('100%');
 
 function onButtonDecreaseImageClick() {
-  scaleValueInput.value = `${parseFloat(scaleValueInput.value) - SCALE_STEP}%`;
+  setInputValue(`${Math.max(parseFloat(scaleValueInput.value) - SCALE_STEP, 0)}%`);
   imgPreview.style.transform = `scale(${scaleValueInput.value})`;
   buttonIncrease.addEventListener('click', onButtonIncreaseImageClick);
 
@@ -19,7 +24,7 @@ function onButtonDecreaseImageClick() {
 }
 
 function onButtonIncreaseImageClick() {
-  scaleValueInput.value = `${parseFloat(scaleValueInput.value) + SCALE_STEP}%`;
+  setInputValue(`${Math.max(parseFloat(scaleValueInput.value) + SCALE_STEP, 0)}%`);
   imgPreview.style.transform = `scale(${scaleValueInput.value})`;
   buttonDecrease.addEventListener('click', onButtonDecreaseImageClick);
 
@@ -38,7 +43,7 @@ const deactivateScaleButtons = () => {
 };
 
 const resetScale = () => {
-  scaleValueInput.value = '100%';
+  setInputValue('100%');
   imgPreview.style.transform = 'scale(1)';
 };
 
