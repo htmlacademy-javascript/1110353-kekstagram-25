@@ -30,6 +30,7 @@ function openBigPictureBlock () {
 function closeBigPictureBlock () {
   body.classList.remove('modal-open');
   bigPictureModal.classList.add('hidden');
+  commentsShowMore.classList.remove('hidden');
 
   bigPictureClose.removeEventListener('click', closeBigPictureBlock);
   document.removeEventListener('keydown', onBigPhotoEscKeydown);
@@ -71,14 +72,14 @@ const renderBigPictureBlock = (smallPicture) => {
     socialCommentsList.append(commentElementsFragment);
   };
 
-  const loadComments = () => {
+  const showComments = () => {
     const neededComments = comments.slice(renderedComments, renderedComments + 5);
     renderComments(neededComments);
   };
 
-  loadComments();
-  commentsShowMore.addEventListener('click', loadComments);
-  bigPictureClose.addEventListener('click', () => commentsShowMore.removeEventListener('click', loadComments));
+  showComments();
+  commentsShowMore.addEventListener('click', showComments);
+  bigPictureClose.addEventListener('click', () => commentsShowMore.removeEventListener('click', showComments));
 };
 
 export {body, renderBigPictureBlock, openBigPictureBlock};

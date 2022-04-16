@@ -44,23 +44,19 @@ const showFilteredPictures = (posts) => {
   filterMenuContainer.classList.remove('img-filters--inactive');
 
   filterMenuContainer.addEventListener('click', debounce((evt) => {
+    const noMoreActiveButton = filterMenuContainer.querySelector('.img-filters__button--active');
+    noMoreActiveButton.classList.remove('img-filters__button--active');
+    const activeButton = evt.target;
+    activeButton.classList.add('img-filters__button--active');
+
     if (evt.target === filterDefaultButton) {
-      filterDefaultButton.classList.add('img-filters__button--active');
-      filterRandomButton.classList.remove('img-filters__button--active');
-      filterDiscussedButton.classList.remove('img-filters__button--active');
       renderPictures(posts);
     }
     if (evt.target === filterRandomButton) {
-      filterDefaultButton.classList.remove('img-filters__button--active');
-      filterRandomButton.classList.add('img-filters__button--active');
-      filterDiscussedButton.classList.remove('img-filters__button--active');
       const randomPictures = shuffleArray([...posts]).slice(0, RANDOM_PICTURES);
       renderPictures(randomPictures);
     }
     if (evt.target === filterDiscussedButton) {
-      filterDefaultButton.classList.remove('img-filters__button--active');
-      filterRandomButton.classList.remove('img-filters__button--active');
-      filterDiscussedButton.classList.add('img-filters__button--active');
       const discussedPictures = posts.slice().sort((a, b) => b.comments.length - a.comments.length);
       renderPictures(discussedPictures);
     }

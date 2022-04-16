@@ -28,7 +28,8 @@ createTextContainers();
 // Валидация формы
 const pristine = new Pristine(
   imgForm,
-  { classTo: 'text__container', errorTextParent: 'text__container' }
+  { classTo: 'text__container', errorTextParent: 'text__container' },
+  false
 );
 
 const getSplitedHashtags = () => {
