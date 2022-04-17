@@ -15,7 +15,7 @@ const commentTemplate = document.querySelector('#comment').content.querySelector
 const onBigPhotoEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    closeBigPictureBlock();
+    onBigPictureBlockClick();
   }
 };
 
@@ -23,16 +23,16 @@ function openBigPictureBlock () {
   body.classList.add('modal-open');
   bigPictureModal.classList.remove('hidden');
 
-  bigPictureClose.addEventListener('click', closeBigPictureBlock);
+  bigPictureClose.addEventListener('click', onBigPictureBlockClick);
   document.addEventListener('keydown', onBigPhotoEscKeydown);
 }
 
-function closeBigPictureBlock () {
+function onBigPictureBlockClick () {
   body.classList.remove('modal-open');
   bigPictureModal.classList.add('hidden');
   commentsShowMore.classList.remove('hidden');
 
-  bigPictureClose.removeEventListener('click', closeBigPictureBlock);
+  bigPictureClose.removeEventListener('click', onBigPictureBlockClick);
   document.removeEventListener('keydown', onBigPhotoEscKeydown);
 }
 
@@ -72,14 +72,14 @@ const renderBigPictureBlock = (smallPicture) => {
     socialCommentsList.append(commentElementsFragment);
   };
 
-  const showComments = () => {
+  const onShowCommentsClick = () => {
     const neededComments = comments.slice(renderedComments, renderedComments + 5);
     renderComments(neededComments);
   };
 
-  showComments();
-  commentsShowMore.addEventListener('click', showComments);
-  bigPictureClose.addEventListener('click', () => commentsShowMore.removeEventListener('click', showComments));
+  onShowCommentsClick();
+  commentsShowMore.addEventListener('click', onShowCommentsClick);
+  bigPictureClose.addEventListener('click', () => commentsShowMore.removeEventListener('click', onShowCommentsClick));
 };
 
 export {body, renderBigPictureBlock, openBigPictureBlock};

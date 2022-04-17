@@ -96,7 +96,7 @@ const getEffect = (effect) => {
   }
 };
 
-const applyEffect = (evt) => {
+const onEffectButtonClick = (evt) => {
   const targetButton = evt.target;
   sliderElement.classList.remove('hidden');
 
@@ -125,4 +125,4 @@ const resetSlider = () => {
   document.querySelector('#effect-none').checked = true;
 };
 
-export {effectsList, applyEffect, resetSlider};
+export {effectsList, onEffectButtonClick, resetSlider};
