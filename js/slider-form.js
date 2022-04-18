@@ -45,10 +45,11 @@ const Effects = {
 
 const effectsList = imgForm.querySelector('.effects__list');
 const effectsRadios = imgForm.querySelectorAll('.effects__radio');
+const sliderContainer = imgForm.querySelector('.img-upload__effect-level');
 const sliderElement = imgForm.querySelector('.effect-level__slider');
 const effectValueHidden = imgForm.querySelector('.effect-level__value');
 
-sliderElement.classList.add('hidden');
+sliderContainer.classList.add('hidden');
 
 noUiSlider.create(sliderElement, {
   range: {
@@ -90,15 +91,15 @@ const getEffect = (effect) => {
       updateEffect('brightness');
       return effect;
     default:
-      sliderElement.classList.add('hidden');
+      sliderContainer.classList.add('hidden');
       effectValueHidden.value = '';
-      imgPreview.style.filter = 'initial';
+      imgPreview.style.filter = 'none';
   }
 };
 
-const applyEffect = (evt) => {
+const onEffectButtonClick = (evt) => {
   const targetButton = evt.target;
-  sliderElement.classList.remove('hidden');
+  sliderContainer.classList.remove('hidden');
 
   sliderElement.noUiSlider.on('update', () => {
     effectValueHidden.value = sliderElement.noUiSlider.get();
@@ -114,15 +115,19 @@ const applyEffect = (evt) => {
 
     imgPreview.classList.add(classEffectsRadio);
 
-    sliderElement.noUiSlider.updateOptions(Effects[getEffect(targetButton.value).toUpperCase()]);
+    const currentEffect  = getEffect(targetButton.value);
+    if (Effects[targetButton.value.toUpperCase()] !== undefined) {
+      sliderElement.noUiSlider.updateOptions(Effects[currentEffect.toUpperCase()]);
+    }
   }
+
 };
 
 const resetSlider = () => {
   sliderElement.noUiSlider.reset();
-  sliderElement.classList.add('hidden');
+  sliderContainer.classList.add('hidden');
   imgPreview.style.filter = 'initial';
   document.querySelector('#effect-none').checked = true;
 };
 
-export {effectsList, applyEffect, resetSlider};
+export {effectsList, onEffectButtonClick, resetSlider};

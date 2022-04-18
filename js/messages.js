@@ -33,7 +33,7 @@ function onSuccessErrorEscKeydown(evt) {
   }
 }
 
-const closeSuccessOrErrorPopup = (evt) => {
+const onSuccessErrorClick = (evt) => {
   const successOrErrorPopup = body.lastElementChild.querySelector('div');
   const closeButton = body.lastElementChild.querySelector('button');
   if(!successOrErrorPopup.contains(evt.target) || closeButton.contains(evt.target)) {
@@ -43,21 +43,21 @@ const closeSuccessOrErrorPopup = (evt) => {
 
 function removePopup() {
   body.lastElementChild.remove();
-  document.removeEventListener('click', closeSuccessOrErrorPopup);
+  document.removeEventListener('click', onSuccessErrorClick);
   document.removeEventListener('keydown', onSuccessErrorEscKeydown);
 }
 
 const showSendDataSuccess = () => {
   const successPopup = document.querySelector('#success').content.cloneNode(true);
   body.append(successPopup);
-  document.addEventListener('click', closeSuccessOrErrorPopup);
+  document.addEventListener('click', onSuccessErrorClick);
   document.addEventListener('keydown', onSuccessErrorEscKeydown);
 };
 
 function showSendDataError() {
   const errorPopup = document.querySelector('#error').content.cloneNode(true);
   body.append(errorPopup);
-  document.addEventListener('click', closeSuccessOrErrorPopup);
+  document.addEventListener('click', onSuccessErrorClick);
   document.addEventListener('keydown', onSuccessErrorEscKeydown);
 }
 

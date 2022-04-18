@@ -2,7 +2,7 @@ import {isEscapeKey} from './util.js';
 import {body} from './render-fullsize.js';
 import {imgForm, imgChooser, descriptionTextarea, hashtagsInput} from './form.js';
 import {resetFields} from './form-validate.js';
-import {effectsList, applyEffect, resetSlider} from './slider-form.js';
+import {effectsList, onEffectButtonClick, resetSlider} from './slider-form.js';
 import {activateDecreaseButton, deactivateScaleButtons, resetScale} from './scale-form.js';
 
 const imgOverlay = imgForm.querySelector('.img-upload__overlay');
@@ -19,7 +19,7 @@ function openImgOverlay() {
   body.classList.add('modal-open');
   document.addEventListener('keydown', onImgOverlayEscKeydown);
   putFormElementsOnFocus();
-  effectsList.addEventListener('change', applyEffect);
+  effectsList.addEventListener('change', onEffectButtonClick);
   activateDecreaseButton();
 }
 
@@ -31,7 +31,7 @@ function closeImgOverlay() {
   resetScale();
   deactivateScaleButtons();
   resetSlider();
-  effectsList.removeEventListener('change', applyEffect);
+  effectsList.removeEventListener('change', onEffectButtonClick);
   resetFields();
   putFormElementsOffFocus();
 }
