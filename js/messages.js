@@ -6,7 +6,7 @@ const ALERT_SHOW_TIME = 5000;
 // Ошибка на получение данных
 const showErrorBlockGetData = (err) => {
   const alertContainer = document.createElement('div');
-  alertContainer.style.zIndex = '100';
+  alertContainer.style.zIndex = '100px';
   alertContainer.style.position = 'absolute';
   alertContainer.style.left = '0';
   alertContainer.style.top = '0';
